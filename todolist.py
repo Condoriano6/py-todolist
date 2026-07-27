@@ -19,11 +19,22 @@ class TodoList:
         else :
             self.next_id = 1
     
-    def get_header(self, prompt):
+    def get_header(self, input_prompt):
         print(Fore.LIGHTCYAN_EX + '=' * 80)
-        print(prompt.center(80))
+        print(input_prompt.center(80))
         print('=' * 80 + Style.RESET_ALL)
 
+    def get_priority(self, input_prompt, allow_blank=False):
+        while True:
+            priority = input(input_prompt).capitalize()
+            if allow_blank and priority == "":
+                return ""
+            
+            if priority in ("High", "Medium", "Low"):
+                return priority
+
+            print(Fore.LIGHTYELLOW_EX + "⚠️ Invalid priority! Please try again!" + Style.RESET_ALL)
+        
     def get_user_choice(self):
         '''
         get users choice and check for any errors
@@ -54,11 +65,7 @@ class TodoList:
         task_id = self.next_id
         title = input("Enter title: ")
         description = input("Enter description: ")
-        while True:
-            priority = input("Enter priority (High/Medium/Low): ").capitalize()
-            if priority in ("High", "Medium", "Low"):
-                break
-            print(Fore.LIGHTYELLOW_EX + "⚠️ Invalid priority! Please try again!" + Style.RESET_ALL)
+        priority = self.get_priority("Enter priority (High/Medium/Low): ")
         t = Task(task_id, title, description, priority)
         self.next_id += 1
         self.tasks.append(t)
@@ -82,7 +89,7 @@ class TodoList:
         '''
         results = []
         for task in self.tasks:
-            if task.title.lower() in keyword.lower():
+            if keyword.lower() in task.title.lower():
                 results.append(task)
         return results
 
@@ -183,7 +190,6 @@ class TodoList:
             else:
                 print(Fore.LIGHTYELLOW_EX + "⚠️ Invalid choice! Please Try again!" + Style.RESET_ALL)
 
-
     def show_task(self, tasks=None):
         '''
         Show the tasks
@@ -219,13 +225,13 @@ class TodoList:
         if task is None:
             return
         while True:
-            confrim = input(f"Are you sure you want do delete \"{task.title}\"? (y/n): ").lower()
-            if confrim == 'y':
+            confirm = input(f"Are you sure you want do delete \"{task.title}\"? (y/n): ").lower()
+            if confirm == 'y':
                 self.tasks.remove(task)
                 print(Fore.LIGHTGREEN_EX + f'✅ Task \"{task.title}\" is deleted!' + Style.RESET_ALL)
                 save_tasks(self.tasks)
                 break
-            if confrim =='n':
+            if confirm =='n':
                 print(Fore.LIGHTRED_EX + "❌ Deleting process canceled!" + Style.RESET_ALL)
                 break
             print(Fore.LIGHTYELLOW_EX + "⚠️ Invalid input! Please try again!" + Style.RESET_ALL)
@@ -290,7 +296,8 @@ class TodoList:
             return
         new_title = input("Enter new title (leave blank to keep current): ")
         new_description = input("Enter new description (leave blank to keep current): ")
-        if task.edit(new_title, new_description):
+        new_priority = self.get_priority("Enter new priority (leave blank to keep current): ", allow_blank=True)
+        if task.edit(new_title, new_description, new_priority):
             save_tasks(self.tasks)
             print(Fore.LIGHTGREEN_EX + "✅ Task updated!" + Style.RESET_ALL)
         else:
@@ -310,7 +317,8 @@ class TodoList:
             percent = (done / total) * 100
         bar_length = 20
         filled = int((percent / 100) * bar_length)
-        bar = '█' * filled + '-' * (bar_length - filled)
+        bar_shape = Fore.LIGHTGREEN_EX + '█' + Style.RESET_ALL
+        bar = bar_shape * filled + '-' * (bar_length - filled)
         self.get_header("📊 STATISTICS")
         print(Fore.LIGHTWHITE_EX + f"📌 Total Tasks: {total}")
         print(Fore.LIGHTWHITE_EX + f"✅ Done: {done}")
