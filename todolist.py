@@ -106,15 +106,20 @@ class TodoList:
     
     def show_menu(self):
         while True:
-            self.get_header("📋 SHOW TASKS")
-            print(Fore.LIGHTWHITE_EX + "1. 🗂 Sort task")
-            print("2. 📂 Filter task")
+            print(Fore.LIGHTCYAN_EX + '=' * 80)
+            print("📋 SHOW TASKS".center(80) + Style.RESET_ALL)
+            self.show_task(self.tasks)
+            print(Fore.LIGHTWHITE_EX + "1. 🔍 Find task")
+            print("2. 🗂 Sort task")
+            print("3. 📂 Filter task")
             print("0. 🔙 Back" + Style.RESET_ALL)
             print(Fore.LIGHTCYAN_EX + '=' * 80 + Style.RESET_ALL)
             choice = self.get_user_choice()
             if choice == 1:
-                self.sort_task()
+                self.search_task()
             elif choice == 2:
+                self.sort_task()
+            elif choice == 3:
                 self.filter_task()
             elif choice == 0:
                 break
@@ -208,7 +213,6 @@ class TodoList:
         for task in tasks:
             print(task.to_row())
         print(Fore.LIGHTCYAN_EX + '-' * 80 + Style.RESET_ALL)
-        self.search_task()
         
     def delete_task(self):
         '''
