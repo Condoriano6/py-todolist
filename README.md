@@ -1,4 +1,4 @@
-# Python Todo
+#Python Todo
 
 A simple Todo List application built with Python.
 
@@ -15,6 +15,8 @@ A simple Todo List application built with Python.
   3. ID
   4. Status (Done/Undone)
 - Give statistics
+- Save files
+- Load files
 
 ## Technologies
 
