@@ -24,7 +24,7 @@ class Task:
         if self.priority == "High":
             priority = "🔴 High"
         elif self.priority == "Medium":
-            priority = "🟠 Meduim"
+            priority = "🟠 Medium"
         elif self.priority == "Low":
             priority = "🟢 Low"
         spliter = Fore.LIGHTCYAN_EX + "|" + Style.RESET_ALL
@@ -51,7 +51,7 @@ class Task:
         self.status = False
         return True
 
-    def edit(self, title, description):
+    def edit(self, title, description, priority):
         '''
         checks the final edit
         '''
@@ -62,6 +62,9 @@ class Task:
             changed = True
         if description:
             self.description = description
+            changed = True
+        if priority:
+            self.priority = priority
             changed = True
         return changed
 
