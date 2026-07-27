@@ -100,25 +100,25 @@ class TodoList:
     def show_menu(self):
         while True:
             self.get_header("📋 SHOW TASKS")
-            print(Fore.LIGHTWHITE_EX + "1. Sort task")
-            print("2. Filter task")
-            print("3. Back" + Style.RESET_ALL)
+            print(Fore.LIGHTWHITE_EX + "1. 🗂 Sort task")
+            print("2. 📂 Filter task")
+            print("0. 🔙 Back" + Style.RESET_ALL)
             print(Fore.LIGHTCYAN_EX + '=' * 80 + Style.RESET_ALL)
             choice = self.get_user_choice()
             if choice == 1:
                 self.sort_task()
-            if choice == 2:
-                pass
-            if choice == 0:
+            elif choice == 2:
+                self.filter_task()
+            elif choice == 0:
                 break
-            if choice == -1:
+            elif choice == -1:
                 continue
             else:
                 print(Fore.LIGHTYELLOW_EX + "⚠️ Invalid choice! Please Try again!" + Style.RESET_ALL)
             
     def sort_task(self):
         while True:
-            self.get_header("📋 SHOW TASKS")
+            self.get_header("🗂 SORT TASKS")
             print(Fore.LIGHTWHITE_EX + "1. 🔥 Sort by Priority")
             print("2. ✅ Sort by Status")
             print("3. 🔤 Sort by Title")
@@ -149,6 +149,40 @@ class TodoList:
                 continue
             else:
                 print(Fore.LIGHTYELLOW_EX + "⚠️ Invalid choice! Please Try again!" + Style.RESET_ALL)
+
+    def filter_task(self):
+        while True:
+            self.get_header("📂 FILTER TASKS")
+            print(Fore.LIGHTWHITE_EX + "1. 🔴 High priority")
+            print("2. 🟠 Medium priority")
+            print("3. 🟢 Low priority")
+            print("4. ✅ Done")
+            print("5. ⏳ Undone")
+            print("0. 🔙 Back" + Style.RESET_ALL)
+            print(Fore.LIGHTCYAN_EX + '=' * 80 + Style.RESET_ALL)
+            choice = self.get_user_choice()
+            if choice == 1:
+                high_tasks = [task for task in self.tasks if task.priority == 'High']
+                self.show_task(high_tasks)
+            elif choice == 2:
+                medium_tasks = [task for task in self.tasks if task.priority == 'Medium']
+                self.show_task(medium_tasks)
+            elif choice == 3:
+                low_tasks = [task for task in self.tasks if task.priority == 'Low']
+                self.show_task(low_tasks)
+            elif choice == 4:
+                done_tasks = [task for task in self.tasks if task.status]
+                self.show_task(done_tasks)
+            elif choice == 5:
+                undone_tasks = [task for task in self.tasks if not task.status]
+                self.show_task(undone_tasks)
+            elif choice == 0:
+                break
+            elif choice == -1:
+                continue
+            else:
+                print(Fore.LIGHTYELLOW_EX + "⚠️ Invalid choice! Please Try again!" + Style.RESET_ALL)
+
 
     def show_task(self, tasks=None):
         '''
