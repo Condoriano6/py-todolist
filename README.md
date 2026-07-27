@@ -6,7 +6,7 @@ A simple Todo List application built with Python.
 
 - Add tasks
 - Remove tasks
-- Edit task
+- Edit tasks
 - Mark tasks as completed
 - Mark tasks as incomplete
 - Show tasks:
