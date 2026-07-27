@@ -2,7 +2,9 @@
 Main menu of the program
 '''
 from colorama import Fore, Style
+
 from todolist import TodoList
+
 
 def get_user_choice():
     '''
@@ -28,7 +30,7 @@ def mainmenu():
         print('=' * 80 + Style.RESET_ALL)
         print(Fore.LIGHTWHITE_EX + "1. ➕ Add task")
         print("2. 📋 Show tasks")
-        print("3. 🗑  Delete task")
+        print("3. 🗑 Delete task")
         print("4. ✅ Mark as done")
         print("5. ⏳ Mark as undone")
         print("6. ✏️ Edit task")

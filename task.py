@@ -3,6 +3,7 @@ Module which has the Task class
 '''
 from colorama import Fore, Style
 
+
 class Task:
     '''
     Task class

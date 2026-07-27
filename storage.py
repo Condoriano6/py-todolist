@@ -2,7 +2,9 @@
 Module that saves and loads the tasks
 '''
 import json
+
 from task import Task
+
 
 def load_tasks():
     '''
@@ -15,7 +17,7 @@ def load_tasks():
             return tasks
     except FileNotFoundError:
         return []
-    except Exception as e:
+    except Exception as e:  
         print(f"Unkown Error: {e}")
         return []
 

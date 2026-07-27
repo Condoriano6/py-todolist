@@ -2,8 +2,10 @@
 Module that main actions happen
 '''
 from colorama import Fore, Style
+
+from storage import load_tasks, save_tasks
 from task import Task
-from storage import save_tasks, load_tasks
+
 
 class TodoList:
     """
