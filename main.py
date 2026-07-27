@@ -39,7 +39,7 @@ def mainmenu():
         if choice == 1:
             todo.add_task()
         elif choice == 2:
-            todo.sort_task()
+            todo.show_menu()
         elif choice == 3:
             todo.delete_task()
         elif choice == 4:

@@ -64,7 +64,7 @@ class TodoList:
         save_tasks(self.tasks)
         print(Fore.LIGHTCYAN_EX + '=' * 80 + Style.RESET_ALL)
 
-    def find_task(self, search):
+    def find_by_id(self, search):
         '''
         Find the task
         '''
@@ -95,6 +95,25 @@ class TodoList:
             return
         self.show_task(results)
     
+    def show_menu(self):
+        while True:
+            self.get_header("📋 SHOW TASKS")
+            print(Fore.LIGHTWHITE_EX + "1. Sort task")
+            print("2. Filter task")
+            print("3. Back" + Style.RESET_ALL)
+            print(Fore.LIGHTCYAN_EX + '=' * 80 + Style.RESET_ALL)
+            choice = self.get_user_choice()
+            if choice == 1:
+                self.sort_task()
+            if choice == 2:
+                pass
+            if choice == 0:
+                break
+            if choice == -1:
+                continue
+            else:
+                print(Fore.LIGHTYELLOW_EX + "⚠️ Invalid choice! Please Try again!" + Style.RESET_ALL)
+            
     def sort_task(self):
         while True:
             self.get_header("📋 SHOW TASKS")
@@ -160,7 +179,7 @@ class TodoList:
         search = self.get_task_id()
         if search == -1:
             return
-        task = self.find_task(search)
+        task = self.find_by_id(search)
         if task is None:
             return
         while True:
@@ -188,7 +207,7 @@ class TodoList:
         search = self.get_task_id()
         if search == -1:
             return
-        task = self.find_task(search)
+        task = self.find_by_id(search)
         if task is None:
             return
         if task.mark_done():
@@ -209,7 +228,7 @@ class TodoList:
         search = self.get_task_id()
         if search == -1:
             return
-        task = self.find_task(search)
+        task = self.find_by_id(search)
         if task is None:
             return
         if task.mark_undone():
@@ -230,7 +249,7 @@ class TodoList:
         search = self.get_task_id()
         if search == -1:
             return
-        task = self.find_task(search)
+        task = self.find_by_id(search)
         if task is None:
             return
         new_title = input("Enter new title (leave blank to keep current): ")
