@@ -18,7 +18,7 @@ def load_tasks():
     except FileNotFoundError:
         return []
     except Exception as e:  
-        print(f"Unkown Error: {e}")
+        print(f"Unkmown Error: {e}")
         return []
 
 def save_tasks(tasks):
